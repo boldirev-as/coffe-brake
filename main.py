@@ -27,7 +27,7 @@ class TextBrowserSample(Ui_MainWindow, QMainWindow):
 
     def draw_flag(self, qp):
         for i in range(3):
-            qp.setBrush(QColor(255, 255, 0))
+            qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
             ran = randint(0, 500)
             qp.drawEllipse(randint(0, 500), randint(0, 500), ran, ran)
 
