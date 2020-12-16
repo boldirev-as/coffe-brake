@@ -1,8 +1,7 @@
 import sys
-from random import randint
+import sqlite3
 
-from PyQt5.QtGui import QPainter, QColor
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from UI import Ui_MainWindow
 
 
@@ -11,25 +10,17 @@ class TextBrowserSample(Ui_MainWindow, QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.do_paint = False
-        self.pushButton.clicked.connect(self.paint)
-
-    def paintEvent(self, event):
-        if self.do_paint:
-            qp = QPainter()
-            qp.begin(self)
-            self.draw_flag(qp)
-            qp.end()
-
-    def paint(self):
-        self.do_paint = True
-        self.repaint()
-        self.do_paint = False
-
-    def draw_flag(self, qp):
-        for i in range(3):
-            qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
-            ran = randint(0, 500)
-            qp.drawEllipse(randint(0, 500), randint(0, 500), ran, ran)
+        self.con = sqlite3.connect("esspresso.sqlite")
+        cur = self.con.cursor()
+        result = cur.execute("SELECT * FROM esspreso").fetchall()
+        # Заполнили размеры таблицы
+        self.tableWidget.setRowCount(len(result))
+        self.tableWidget.setColumnCount(len(result[0]))
+        self.titles = [description[0] for description in cur.description]
+        self.tableWidget.setHorizontalHeaderLabels(self.titles)
+        for i, elem in enumerate(result):
+            for j, val in enumerate(elem):
+                self.tableWidget.setItem(i, j, QTableWidgetItem(str(val)))
 
 
 def except_hook(cls, exception, traceback):
