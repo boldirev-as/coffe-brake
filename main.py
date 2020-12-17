@@ -2,16 +2,16 @@ import sys
 import sqlite3
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
-from UI import Ui_MainWindow
-from addEditCoffeeForm import Ui_MainWindow as UI
+from UI.UI import Ui_MainWindow
+from UI.addEditCoffeeForm import Ui_MainWindow as UI_2
 
 
-class Form(UI, QMainWindow):
+class Form(UI_2, QMainWindow):
     def __init__(self, item=None, parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.item = item
-        self.bd = sqlite3.connect("esspresso.sqlite")
+        self.bd = sqlite3.connect("Data/esspresso.sqlite")
         self.pushButton.clicked.connect(self.check_and_send)
         self.parent = parent
         if item is not None:
@@ -50,7 +50,7 @@ class TextBrowserSample(Ui_MainWindow, QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.do_paint = False
-        self.con = sqlite3.connect("esspresso.sqlite")
+        self.con = sqlite3.connect("Data/esspresso.sqlite")
         self.add_btn.clicked.connect(self.add_new_item)
         self.edit_btn.clicked.connect(self.edit_item)
         self.update()
