@@ -18,10 +18,16 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 791, 551))
+        self.tableWidget.setGeometry(QtCore.QRect(0, 50, 791, 501))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
+        self.add_btn = QtWidgets.QPushButton(self.centralwidget)
+        self.add_btn.setGeometry(QtCore.QRect(10, 10, 93, 28))
+        self.add_btn.setObjectName("add_btn")
+        self.edit_btn = QtWidgets.QPushButton(self.centralwidget)
+        self.edit_btn.setGeometry(QtCore.QRect(120, 10, 93, 28))
+        self.edit_btn.setObjectName("edit_btn")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
@@ -37,3 +43,5 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.add_btn.setText(_translate("MainWindow", "Добавить"))
+        self.edit_btn.setText(_translate("MainWindow", "Редактировать"))
